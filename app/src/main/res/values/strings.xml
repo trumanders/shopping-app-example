@@ -6,7 +6,16 @@
     <string name="orange">Orange</string>
     <string name="grapes">Grapes</string>
 
+    <string name="currency">kr</string>
+
     <string name="iteminfo">Items added: %1$s</string>
-    <string name="btnGoToShoppingCart">Shopping cart -></string>
+    <string name="btnGoToShoppingCart">Shopping cart →</string>
+    <string name="btnBackToShopping">← Back to shop</string>
+    <string name="confirmOrder">Confirm order →</string>
+    <string name="totalProductPrice">Total: %1$s %2$s</string>
+    <string name="orderTotalPrice">Order total price: %1$s %2$s</string>
+    <string name="productNameAndPrice">%1$s (%2$s %3$s)</string>
+    <string name="productAmount">Amount: %1$s</string>
+
 
 </resources>

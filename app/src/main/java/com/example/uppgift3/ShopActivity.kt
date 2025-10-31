@@ -10,7 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.uppgift3.databinding.ActivityMainBinding
+import com.example.uppgift3.databinding.ActivityShopBinding
 import java.math.BigDecimal
 
 class ShopActivity : AppCompatActivity() {
@@ -24,11 +24,11 @@ class ShopActivity : AppCompatActivity() {
 
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
-    private lateinit var viewBinding: ActivityMainBinding
+    private lateinit var viewBinding: ActivityShopBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewBinding = ActivityMainBinding.inflate(layoutInflater)
+        viewBinding = ActivityShopBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(viewBinding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -39,24 +39,9 @@ class ShopActivity : AppCompatActivity() {
 
         setupImageViews()
         setUpTextViews()
-        setUpActivityResultLauncher()
         setUpButtons()
-
     }
 
-    // This callback will run when other activity returns result witht he key
-    // That return type must match the type in here
-    private fun setUpActivityResultLauncher() {
-        resultLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result ->
-            if (result.resultCode == RESULT_OK) {
-                @Suppress("DEPRECATION", "UNCHECKED_CAST")
-                val returnList = result.data?.getSerializableExtra("RESULT_KEY") as? ArrayList<Product>
-                Toast.makeText(this, "Result: " + returnList?.joinToString { it.name }, Toast.LENGTH_LONG).show()
-            }
-        }
-    }
 
     private fun setupImageViews() {
         apple_iv = viewBinding.ivItem1
@@ -93,7 +78,7 @@ class ShopActivity : AppCompatActivity() {
         viewBinding.btnGoToShoppingCart.setOnClickListener {
             val intent = Intent(this@ShopActivity, BasketActivity::class.java)
             intent.putExtra("selectedItems", selectedItems)
-            resultLauncher.launch(intent)
+            startActivity(intent)
         }
     }
 
