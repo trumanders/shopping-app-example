@@ -1,10 +1,10 @@
 package com.example.uppgift3
 
 import android.content.Context
-import android.content.Intent
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -125,21 +125,24 @@ class ViewCreator {
         return button
     }
 
-//    private fun createRightButton(context: Context, buttonText: String): Button {
-//        val rightButton = MaterialButton(context).apply {
-//            text = buttonText
-//            layoutParams = LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.WRAP_CONTENT,
-//                LinearLayout.LayoutParams.WRAP_CONTENT
-//            )
-////            setOnClickListener {
-////                val intent = Intent(this@ShopActivity, BasketActivity::class.java)
-////                intent.putExtra("selectedItems", selectedItems)
-////                startActivity(intent)
-////            }
-//        }
-//        return rightButton
-//    }
+    fun form(context: Context): LinearLayout {
+        val verticalLayout = createVerticalLayout(context).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(100,100,100,100)
+        }
+        val formFields = context.resources.getStringArray(R.array.formfields)
+
+        formFields.forEach { formField ->
+            verticalLayout.addView(TextView(context).apply { text = formField })
+            val editText = EditText(context).apply {
+                isSingleLine = true
+                maxLines = 1
+                setEms(50)
+            }
+            verticalLayout.addView(editText)
+        }
+        return verticalLayout
+    }
 
     private fun setDecimalFormat(number: BigDecimal): String {
         return number.setScale(2, RoundingMode.HALF_UP).toPlainString()

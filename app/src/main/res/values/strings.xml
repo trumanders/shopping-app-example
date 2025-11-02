@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Uppgift3</string>
+
+    <string name="welcometext">Great deals on fruit!\nThis shop is perfect for you, if you want to buy bananas, apples, oranges, or grapes.\nHappy shopping!</string>
     <string name="currency">kr</string>
     <string name="iteminfo">Items added: %1$s</string>
 
@@ -12,14 +14,15 @@
     <string name="toShoppingCart">Shopping cart →</string>
 
     # Shopping cart
-    <string name="backToShop">← Back to shop</string>
+    <string name="backToShop">← Continue shopping</string>
     <string name="toCheckout">Checkout →</string>
     <string name="totalProductPrice">Total: %1$s %2$s</string>
 
 
     # Checkout
     <string name="backToShoppingCart">← Shopping cart</string>
-    <string name="pay">Pay now</string>
+    <string name="paynow">Pay now</string>
+    <string name="cancel">Cancel</string>
 
     <string name="orderTotalPrice">Order total price: %1$s %2$s</string>
     <string name="productAmount">Amount: %1$s</string>
@@ -38,6 +41,15 @@
         <item>24.9</item>
         <item>21.4</item>
         <item>43.9</item>
+    </string-array>
+
+    # Form fields labels
+    <string-array name="formfields">
+        <item>First name:</item>
+        <item>Last name:</item>
+        <item>Street address:</item>
+        <item>City:</item>
+        <item>Cart number:</item>
     </string-array>
 
 

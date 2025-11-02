@@ -41,7 +41,6 @@ class BasketActivity : AppCompatActivity() {
 
     private fun createViews(cartData: ArrayList<CartItemData>) {
         val size = 120
-
         val orderTotalPriceTextView = viewCreator.orderTotalPriceText(this, selectedItems.sumOf { it.price })
 
         cartData.forEach { item ->
