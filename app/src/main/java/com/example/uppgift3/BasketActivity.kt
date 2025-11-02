@@ -2,22 +2,20 @@ package com.example.uppgift3
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.uppgift3.databinding.ActivityBasketBinding
-import com.google.android.material.button.MaterialButton
-import java.math.BigDecimal
-import java.math.RoundingMode
 
 class BasketActivity : AppCompatActivity() {
     private lateinit var cartItemDataProcessor: CartItemDataProcessor
     private lateinit var viewBinding: ActivityBasketBinding
     private lateinit var selectedItems: ArrayList<Product>
+    private lateinit var viewCreator: ViewCreator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +25,11 @@ class BasketActivity : AppCompatActivity() {
 
         @Suppress("DEPRECATION", "UNCHECKED_CAST")
         selectedItems = intent.getSerializableExtra("selectedItems") as ArrayList<Product>
+
         cartItemDataProcessor = CartItemDataProcessor(selectedItems)
+        viewCreator = ViewCreator()
         val cartData = cartItemDataProcessor.prepareCartData()
+
         createViews(cartData)
 
         onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
@@ -39,84 +40,46 @@ class BasketActivity : AppCompatActivity() {
     }
 
     private fun createViews(cartData: ArrayList<CartItemData>) {
-        val productImageViewWidthDp = (120 * resources.displayMetrics.density).toInt()
-        val productImageViewHeightDp = (120 * resources.displayMetrics.density).toInt()
+        val size = 120
 
-        val orderTotalPriceTextView = TextView(this).apply {
-            val totalPrice = selectedItems.sumOf { item -> item.price }
-            text = getString(R.string.orderTotalPrice, setDecimalFormat(totalPrice), getString(R.string.currency))
-            setPadding(50, 50, 50, 50)
-        }
+        val orderTotalPriceTextView = viewCreator.orderTotalPriceText(this, selectedItems.sumOf { it.price })
 
         cartData.forEach { item ->
-            val count = item.count
-            val price = item.product.price
-            val totalPrice = (price.multiply(count.toBigDecimal()))
-            val currency = getString(R.string.currency)
-
-            val productInfoVerticalLayout = createVerticalLayout().apply {
-                addView(createTextView(
-                    getString(
-                        R.string.productNameAndPrice,
-                        item.product.name,
-                        setDecimalFormat(item.product.price),
-                        currency)
-                    )
-                )
-                addView(createTextView(
-                    getString(R.string.productAmount, item.count.toString()))
-                )
-                addView(createTextView(
-                    getString(R.string.totalProductPrice,setDecimalFormat(totalPrice), currency))
-                )
+            val productInfoVerticalLayout = viewCreator.createVerticalLayout(this).apply {
+                addView(viewCreator.productNameAndPriceText(this@BasketActivity, item.product))
+                addView(viewCreator.productAmountText(this@BasketActivity, item.count))
+                addView(viewCreator.totalProductPrice(this@BasketActivity, item))
             }
 
-            val productImageView = createImageView(
-                item.product.image,
-                productImageViewWidthDp,
-                productImageViewHeightDp
+            val productImageView = viewCreator.createProductImageView(
+                this@BasketActivity,
+                item.product,
+                size
             )
 
-            val imageAndInfoHorizontalLayout = createHorizontalLayout().apply {
+            val imageAndInfoHorizontalLayout = viewCreator.createHorizontalLayout(this).apply {
                 addView(productImageView)
                 addView(productInfoVerticalLayout)
             }
+            imageAndInfoHorizontalLayout.gravity = Gravity.BOTTOM
 
             viewBinding.llVertical.addView(imageAndInfoHorizontalLayout)
         }
 
-        val buttonsHorizontalLayout = LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            setPadding(30, 0, 30, 0)
+        val buttonsHorizontalLayout = viewCreator.createNavigationButtons(
+            this,
+            getString(R.string.backToShop),
+            getString(R.string.toCheckout)
+        )
+
+        buttonsHorizontalLayout.getChildAt(0)
+            .setOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        buttonsHorizontalLayout.getChildAt(2).setOnClickListener {
+            val intent = Intent(this@BasketActivity, ConfirmActivity::class.java)
+            intent.putExtra("confirmationCartData", cartData)
+            startActivity(intent)
         }
 
-        val backToShoppingButton = MaterialButton(this).apply {
-            text = getString(R.string.btnBackToShopping)
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-
-            setOnClickListener {
-                onBackPressedDispatcher.onBackPressed()
-            }
-        }
-
-        val confirmOrderButton = MaterialButton(this).apply {
-            text = getString(R.string.confirmOrder)
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            setOnClickListener {
-                val intent = Intent(this@BasketActivity, ConfirmActivity::class.java)
-                intent.putExtra("cartItemData", cartData)
-                startActivity(intent)
-            }
-        }
-
-        buttonsHorizontalLayout.addView(backToShoppingButton)
-        buttonsHorizontalLayout.addView(confirmOrderButton)
         viewBinding.llVertical.addView(orderTotalPriceTextView)
         viewBinding.llVertical.addView(buttonsHorizontalLayout)
     }
@@ -126,13 +89,6 @@ class BasketActivity : AppCompatActivity() {
             id = View.generateViewId()
             layoutParams = LinearLayout.LayoutParams(width, height)
             setImageResource(image)
-        }
-    }
-
-    private fun createTextView(textViewText: String, fontSize: Float = 16f): TextView {
-        return TextView(this).apply {
-            text = textViewText
-            textSize = fontSize
         }
     }
 
@@ -150,7 +106,5 @@ class BasketActivity : AppCompatActivity() {
         }
     }
 
-    private fun setDecimalFormat(number: BigDecimal): String {
-        return number.setScale(2, RoundingMode.HALF_UP).toPlainString()
-    }
+
 }

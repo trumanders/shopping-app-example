@@ -1,21 +1,44 @@
 <resources>
     <string name="app_name">Uppgift3</string>
-
-    <string name="apple">Apple</string>
-    <string name="banana">Banana</string>
-    <string name="orange">Orange</string>
-    <string name="grapes">Grapes</string>
-
     <string name="currency">kr</string>
-
     <string name="iteminfo">Items added: %1$s</string>
-    <string name="btnGoToShoppingCart">Shopping cart →</string>
-    <string name="btnBackToShopping">← Back to shop</string>
-    <string name="confirmOrder">Confirm order →</string>
-    <string name="totalProductPrice">Total: %1$s %2$s</string>
-    <string name="orderTotalPrice">Order total price: %1$s %2$s</string>
+
+    <string name="toShop">Start shopping →</string>
+
     <string name="productNameAndPrice">%1$s (%2$s %3$s)</string>
+
+    # Shop
+    <string name="backToMain">← Home</string>
+    <string name="toShoppingCart">Shopping cart →</string>
+
+    # Shopping cart
+    <string name="backToShop">← Back to shop</string>
+    <string name="toCheckout">Checkout →</string>
+    <string name="totalProductPrice">Total: %1$s %2$s</string>
+
+
+    # Checkout
+    <string name="backToShoppingCart">← Shopping cart</string>
+    <string name="pay">Pay now</string>
+
+    <string name="orderTotalPrice">Order total price: %1$s %2$s</string>
     <string name="productAmount">Amount: %1$s</string>
+
+    # Available products
+    <string-array name="availableProducts">
+        <item>Banana</item>
+        <item>Apple</item>
+        <item>Orange</item>
+        <item>Grapes</item>
+    </string-array>
+
+    # Available products-prices
+    <string-array name="availableProductsPrices">
+        <item>19.8</item>
+        <item>24.9</item>
+        <item>21.4</item>
+        <item>43.9</item>
+    </string-array>
 
 
 </resources>
