@@ -39,7 +39,7 @@ class ViewCreator {
         horizontalLayout.gravity = Gravity.BOTTOM
 
         horizontalLayout.addView(
-            createProductImageView(context, product, 90)
+            createImageView(context, product.image, 90)
         )
         horizontalLayout.addView(
             productNameAndPriceText(context, product)
@@ -89,12 +89,12 @@ class ViewCreator {
     }
 
 
-    fun createProductImageView(context: Context, product: Product, size: Int) : ImageView {
+    fun createImageView(context: Context, image: Int, size: Int) : ImageView {
         val imageView = ImageView(context).apply {
             val dpSize = (size * resources.displayMetrics.density).toInt()
             id = View.generateViewId()
             layoutParams = LinearLayout.LayoutParams(dpSize, dpSize)
-            setImageResource(product.image)
+            setImageResource(image)
         }
         return imageView
     }

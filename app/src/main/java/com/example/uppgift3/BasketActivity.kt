@@ -50,9 +50,9 @@ class BasketActivity : AppCompatActivity() {
                 addView(viewCreator.totalProductPrice(this@BasketActivity, item))
             }
 
-            val productImageView = viewCreator.createProductImageView(
+            val productImageView = viewCreator.createImageView(
                 this@BasketActivity,
-                item.product,
+                item.product.image,
                 size
             )
 

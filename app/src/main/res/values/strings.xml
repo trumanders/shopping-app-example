@@ -52,5 +52,11 @@
         <item>Cart number:</item>
     </string-array>
 
+    <!-- Languages -->
+    <string-array name="languages">
+        <item>en</item>
+        <item>sv</item>
+    </string-array>
+
 
 </resources>

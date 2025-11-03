@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">Uppgift3</string>
+
+    <string name="welcometext">Finfina erbjudanden på frukt!\nDen här butiken är perfekt för dig som vill köpa bananer, äpplen, apelsiner eller vindruvor!</string>
+    <string name="currency">kr</string>
+    <string name="iteminfo">Antal varor: %1$s</string>
+
+    <string name="toShop">Börja handla →</string>
+
+    <string name="productNameAndPrice">%1$s (%2$s %3$s)</string>
+
+    <!-- Shop -->
+    <string name="backToMain">← Hem</string>
+    <string name="toShoppingCart">Varukorg →</string>
+
+    <!-- Shopping cart -->
+    <string name="backToShop">← Fortsätt handla</string>
+    <string name="toCheckout">Till kassan →</string>
+    <string name="totalProductPrice">Totalt: %1$s %2$s</string>
+
+    <!-- Checkout -->
+    <string name="backToShoppingCart">← Varukorg</string>
+    <string name="paynow">Betala nu</string>
+    <string name="cancel">Avbryt</string>
+
+    <string name="orderTotalPrice">Orderns totalpris: %1$s %2$s</string>
+    <string name="productAmount">Antal: %1$s</string>
+
+    <!-- Available products -->
+    <string-array name="availableProducts">
+        <item>Banan</item>
+        <item>Äpple</item>
+        <item>Apelsin</item>
+        <item>Vindruvor</item>
+    </string-array>
+
+    <!-- Available products-prices -->
+    <string-array name="availableProductsPrices">
+        <item>19.8</item>
+        <item>24.9</item>
+        <item>21.4</item>
+        <item>43.9</item>
+    </string-array>
+
+    <!-- Form fields labels -->
+    <string-array name="formfields">
+        <item>Förnamn:</item>
+        <item>Efternamn:</item>
+        <item>Gatuadress:</item>
+        <item>Stad:</item>
+        <item>Kortnummer:</item>
+    </string-array>
+
+
+</resources>
